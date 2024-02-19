@@ -58,7 +58,7 @@ def failed_page_urls(url):
 def __main__():
     base_url = "https://www.artic.edu/collection?" 
     
-    for i in range(len(artstyle_places)):
+    for i in range(len(artstyle_places)-6, len(artstyle_places)-5):
         print(f"For place: {artstyle_places[i]['place']}__", end="")
         total_pages = math.ceil(artstyle_places[i]['results'] / results_per_page)
         print(f"Total pages: {total_pages}>>>>>>>>>>>>>>>>>>>>>>>>") 
@@ -80,7 +80,7 @@ def __main__():
 
             urls = [element.get_attribute('href') for element in url_elements]
             print(f"Page No: {page_no}------------------------------------->")
-            print(f"These are the data: {urls}")
+            # print(f"These are the data: {urls}")
 
             if len(urls) == 0:
                 failed_page_urls(url=url)
