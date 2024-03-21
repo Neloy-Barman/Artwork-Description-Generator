@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artwork Caption Generator</title>
-    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}"> -->
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
+    <!-- <link rel="stylesheet" type="text/css" href="/static/css/style.css"> -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -27,46 +27,35 @@
                 </div>
             </div>
             <div align="center">
-                <!-- <button type="submit" class="btn btn-primary">Upload an Image</button> -->
-        	    <input id="photo" type="file">
-                <!-- <div id="results"></div> -->
-                <img id="preview">
+                <div class="result">
+        	        <input id="imageupload" type="file">
+                    <img id="imagePreview">
+                </div>
             </div>
         </div>
-        <!-- <span id="element"></span> -->
     </div>
     <script>
-        function read() {
-           const reader = new FileReader();
-           const input = document.getElementById('photo');
-           // console.log(input)
-   
-           // console.log(reader.result);
-   
-           // input.style.display = 'none';
-   
-           // results.innerHTML = 
-           // `
-           // <div class="container_new" align="center">
-           // 	<div class="loader"></div>
-           // </div>
-           // `;
-           // reader.addEventListener('load', () => loaded(reader))
-           reader.readAsDataURL(photo.files[0]);
-           console.log(photo.files[0]);
-   
-        //    results.innerHTML = 
-        //    `<img src="{}">
-        //    `;
-
-           reader.onload = function(event){
-            var imgelement = document.getElementById('preview');
-            imgelement.src = event.target.result;
-           }
-        //    reader.readAsDataURL()
-       }
-   
-       photo.addEventListener('input', read);
+        document.getElementById('imagePreview').hidden = true;
+        function read(event){
+            const file = event.target.files[0];
+            // console.log(file);
+            if(file){
+                const reader = new FileReader();
+                reader.onload = function(e){
+                    const image = e.target.result;
+                    console.log(image);
+                    const uploadButton = document.getElementById('imageupload');
+                    uploadButton.hidden = true;
+                    const imagePreview = document.getElementById('imagePreview');
+                    imagePreview.hidden = false;
+                    console.log(imagePreview);
+                    imagePreview.src = image; 
+                }
+                const red = reader.readAsDataURL(file);
+            }
+            console.log('Hello World');
+        }
+        imageupload.addEventListener('input', read);
    </script>
 </body>
 </html>
